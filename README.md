@@ -13,8 +13,8 @@ password= password
 
 ```diff
 - WARNING
-+ User name and password will be stored in **plain text**, so you should know the risks you assume in case your system gets 
-+ compromised.
++ User name and password will be stored in **plain text**, so you should know the risks you assume in case 
++ your system gets compromised.
 ```
 
 ## Running the script
