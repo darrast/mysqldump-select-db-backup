@@ -1,5 +1,6 @@
 # mysqldump-select-db-backup
-Create a MySQL database backup selected from all the databases available on the server for a given MySQL user.
+A simple bash scritp to create a MySQL database backup selected from all the databases available on the server
+for a given MySQL user.
 
 ## Prerequisites
 
