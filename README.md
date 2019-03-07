@@ -4,7 +4,7 @@ for a given MySQL user.
 
 ## Prerequisites
 
-MySQL user name and password have been stored in the hidden file .my.cnf under $HOME directory. 
+MySQL user name and password have been previously stored in the hidden file .my.cnf under $HOME directory. 
 
 ```
 [client]
