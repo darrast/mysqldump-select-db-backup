@@ -4,10 +4,10 @@ set +x
 
 #=========================================================================#	
 #                      MYSQLDUMP-SELECT-DB-BACKUP                         #
-#									                                                        #
+#									  #                                                      
 # Author: darrastio                                                       #
 # Git repo: https://github.com/darrast/mysqldump-select-db-backup         #
-# 									                                                      #
+# 									  #                                                    
 # Simple interactive bash script that enumerates all the MySQL databases  #
 # that exist on the server letting to choose between them which to backup #
 # using mysqldump. MySQL credentials must be setup in ~/.my.cnf file      #
