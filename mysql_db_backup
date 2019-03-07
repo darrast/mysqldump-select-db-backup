@@ -1,0 +1,82 @@
+#!/bin/bash
+
+set +x
+
+#=========================================================================#	
+#                      MYSQLDUMP-SELECT-DB-BACKUP                         #
+#									                                                        #
+# Author: darrastio                                                       #
+# Git repo: https://github.com/darrast/mysqldump-select-db-backup         #
+# 									                                                      #
+# Simple interactive bash script that enumerates all the MySQL databases  #
+# that exist on the server letting to choose between them which to backup #
+# using mysqldump. MySQL credentials must be setup in ~/.my.cnf file      #
+#=========================================================================#	
+
+## Assign a MySQL user to $user variable
+mysql_user=root
+
+## Enumerate all the databases and redirect output to a file
+mysql -u $mysql_user -BN -e "SHOW DATABASES"  > db.txt
+
+## Create an array with databases listed in previous file
+readarray dbs < db.txt
+
+## Add 'Quit' value to the array, so it can be displayed by 'select' statement
+dbs+=('Quit')
+
+## Define the message prompted related to the 'select' statement 
+PS3="Choose a database: "
+
+## 'select' statement will display all the array values and will store chosen
+## option in $database variable
+select database in ${dbs[@]}
+
+do
+## Test if 'Exit' option is chosen to exit the script
+   if [[ $database = 'Quit' ]]
+	then
+	    echo "Exiting program..."
+	    sleep 1
+	    exit
+## Test if it is chosen a number or any other string not in the Menu. If so
+## a warning message is displayed and prompt pops up to try again.
+   elif [ -z $database ]
+        then
+            echo
+	    echo "Please try again, you must enter a valid Menu number"
+            echo
+   else
+
+   ## Assign value to backup path variable ($bak_path)
+   bak_path="/home/$USER/backups/"
+
+   ## Assign date format to $date variable. Day-Month-Year
+   date=$(date +%d-%m-%Y)
+
+   ## Assign backup file name to $back_name variable.
+   bak_name="${date}_${database}.sql"
+
+   ## The database selected is backed up into a sql file.
+   mysqldump -u $mysql_user $database > $bak_path$bak_name
+
+   ## Check if backup has been correctly created
+       if [ -s $bak_path$bak_name ]
+       then
+           echo
+           echo "A backup file of $database database has been dumped to $bak_path$bak_name"
+           echo
+       else
+           echo
+	   echo "An error ocurred, please run the script in debug mode (set -x) to show more info"
+	   echo "Exiting program..."
+	   sleep 1   
+           exit
+       fi
+   fi
+done
+
+## Delete file db.txt that contains database list.
+if [ -e db.txt ]
+    rm db.txt
+fi
