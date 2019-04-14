@@ -19,4 +19,4 @@ password= "password"
 ```
 
 ## Running the script
-When the script is executed displays a **Menu list** with all the databases that the user has permissions to access in the server. MySQL root user is used in the example. Filling the prompt with a number will chose the database we want to be backed up and stored in the directory assigned to **$bak_path** variable. After backup is done it is possible to choose another database as many times as we want or **Exit** the script.
+When the script is executed displays a **Menu list** with all the databases that the user has permissions to access on the server. MySQL root user is used in this example. Filling the prompt with a number will choose the database we want to be backed up and stored in the directory assigned to **$bak_path** variable. After backup is done it is possible to choose another database as many times as we want or **Exit** the script.
